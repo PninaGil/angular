@@ -12,7 +12,7 @@ export class StudentListComponent {
                 {id:789, name:"מינה", pail: true,leavingDate: undefined},
                 {id:101, name:"פנינה", pail: true,leavingDate: undefined}
               ]
- selectedStudent!: Student;
+ selectedStudent: Student | undefined;
  add:boolean=false;
  deleteStudent(student:Student){
   let index = this.students.indexOf(student)
@@ -26,6 +26,7 @@ export class StudentListComponent {
 
   addStudent(){
     debugger;
+    this.selectedStudent = undefined;
     this.add = true;
   }
 }
