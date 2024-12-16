@@ -1,0 +1,14 @@
+<h1>wellcom!!</h1>
+<ul class="list-group">
+    <li *ngFor="let student of students" class="list-group-item">
+        <div class="row">
+            <div class="col-2>">{{student.name}}</div>
+            <div class="col-2"><button (click)="deleteStudent(student)">מחיקה</button></div>
+            <div class="col-2"><button (click)="showStudent(student)">עריכה</button></div>
+        </div>
+    </li>
+</ul>
+<div class="col-2"><button (click)="addStudent()">הוספה</button></div>
+
+<app-student-details [student]="selectedStudent" [add]="add"></app-student-details>
+<app-student-details [add]="add" *ngIf="add"></app-student-details>
