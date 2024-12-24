@@ -12,21 +12,23 @@ export class StudentListComponent {
                 {id:789, name:"מינה", pail: true,leavingDate: undefined},
                 {id:101, name:"פנינה", pail: true,leavingDate: undefined}
               ]
- selectedStudent: Student | undefined;
- add:boolean=false;
+ selectedStudent?: Student;
  deleteStudent(student:Student){
   let index = this.students.indexOf(student)
   this.students.splice(index,1)
  }
 
   showStudent(student:Student){
-    this.add = false;
     this.selectedStudent = student;
   }
 
   addStudent(){
     debugger;
+    this.selectedStudent = new Student("new student");
+  }
+
+  addStudentToList(studentToAdd:Student){
+    this.students.push(studentToAdd)
     this.selectedStudent = undefined;
-    this.add = true;
   }
 }

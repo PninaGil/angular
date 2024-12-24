@@ -10,5 +10,4 @@
 </ul>
 <div class="col-2"><button (click)="addStudent()">הוספה</button></div>
 
-<app-student-details [student]="selectedStudent" [add]="false"></app-student-details>
-<app-student-details [add]="add" [student]="undefined" *ngIf="add"></app-student-details>
+<app-student-details [student]="selectedStudent" (onSave)="addStudentToList($event)"></app-student-details>
