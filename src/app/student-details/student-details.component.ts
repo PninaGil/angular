@@ -6,11 +6,24 @@ import { Student } from '../student.model';
   templateUrl: './student-details.component.html',
 })
 export class StudentDetailsComponent {
+  
   @Input()
   student:Student | undefined;
+  @Input()
+  add:boolean = false
+
   @Output()
-  onSave:EventEmitter<Student> = new EventEmitter<Student>()
+  onAddSave:EventEmitter<Student> = new EventEmitter<Student>()
+  @Output()
+  onUodateSave:EventEmitter<Student> = new EventEmitter<Student>()
+
   addStudent(){
-    this.onSave.emit(this.student)
+    if(this.add)
+      this.onAddSave.emit(this.student)
+    else this.updateStudent()
+  }
+
+  updateStudent(){
+    this.onUodateSave.emit(this.student)
   }
 }
