@@ -1,13 +1,60 @@
 <div class="card" *ngIf="student else noPail">
-    <div *ngIf="student.pail else noPail">
-        <div class="form-group">
-            <label for="name">name: </label>
-            <input type="text" class="form-control" id="name" [value]="student.name">
+    <h5 *ngIf="!student.pail">{{student.pail}}llll</h5>
+    <form [formGroup]="studentForm">
+        <div *ngIf="student.pail else noPail">
+            <div class="form-group">
+                <label for="name">name: </label>
+                <input type="text" class="form-control" formControlName="name" id="name" [value]="student.name" (focus)="touch()">
+                <ng-container *ngIf="studentForm.controls['name'].errors">
+                    <div #error1 name="error1" class="alert alert-danger" *ngIf="touched && studentForm.controls['name'].errors['required']">שדה חובה
+                    </div>
+                    <div #error2 class="alert alert-danger" *ngIf="touched && studentForm.controls['name'].errors['minlength'] && !studentForm.controls['name'].errors['required']">שם קצר מדי
+                    </div>
+                </ng-container>
+                <label for="course">course:</label>
+                <select class="form-control" formControlName="course" id="course">
+                    <option *ngFor="let course of courses" value={{course.name}}>{{course.name}}</option>
+                </select>
+                <div class="form-control">
+                    <label for="year">year:</label>
+                    <input type="radio" name="year" value="First" formControlName="year">{{years.First}}
+                    <input type="radio" name="year" value="Second" formControlName="year">{{years.Second}}
+                    <input type="radio" name="year" value="Third" formControlName="year">{{years.Third}}
+                    <input type="radio" name="year" value="Fourth" formControlName="year">{{years.Fourth}}
+                </div>
+                <div [ngSwitch]="studentForm.controls['year'].value">
+                    <div *ngSwitchCase="'First'">
+                        בשנה הראשונה ישנם 120 ימי לימוד
+                    </div>
+                    <div *ngSwitchCase="'Second'">
+                        בשנה השניה ישנם 110 ימי לימוד
+                    </div>
+                    <div *ngSwitchCase="'Third'">
+                        בשנה השלישית ישנם 90 ימי לימוד
+                    </div>
+                    <div *ngSwitchCase="'Fourth'">
+                        בשנה הרביעית ישנם 90 ימי לימוד
+                    </div>
+                    <div *ngSwitchDefault>
+                        בחר שנת לימודים
+                    </div>
+                </div>
+            </div>
+            <button (click)="addStudent()" [disabled]="!studentForm.valid">שמירה</button>
         </div>
-        <button (click)="addStudent()">שמירה</button>
-    </div>
-
+    </form>
 </div>
 <ng-template #noPail>
     <h1>{{student?.leavingDate}}</h1>
 </ng-template>
+<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        הסטודנט נוסף בהצלחה
+      {{studentForm.controls['name'].value}}
+      {{studentForm.controls['course'].value}}
+      {{studentForm.controls['year'].value}}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>

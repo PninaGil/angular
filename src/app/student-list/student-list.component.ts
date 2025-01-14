@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Student } from '../student.model';
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'app-student-list',
@@ -8,10 +8,10 @@ import { Student } from '../student.model';
 export class StudentListComponent {
 
   students:Student[] = [{
-   id: 123, name: "דינה", pail: true,average:92},
-                {id:456, name:"רינה", pail: false,leavingDate: new Date("12/12/2024")},
-                {id:789, name:"מינה", pail: true,average:80},
-                {id:101, name:"פנינה", pail: true,average:98}
+   id: 1, name: "דינה", pail: true,average:92},
+                {id:2, name:"רינה", pail: false,leavingDate: new Date("12/12/2024")},
+                {id:3, name:"מינה", pail: true,average:80},
+                {id:4, name:"פנינה", pail: true,average:98}
               ]
 
  selectedStudent?: Student;
@@ -28,10 +28,11 @@ export class StudentListComponent {
 
   addStudent(){
     this.add = true;
-    this.selectedStudent = new Student("new student");
+    this.selectedStudent = new Student("")
   }
 
   addStudentToList(studentToAdd:Student){
+    studentToAdd.id = this.students.length + 1
     this.students.push(studentToAdd)
     this.selectedStudent = undefined;
     this.add = false;
