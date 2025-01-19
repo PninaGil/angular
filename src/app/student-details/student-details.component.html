@@ -4,11 +4,11 @@
         <div *ngIf="student.pail else noPail">
             <div class="form-group">
                 <label for="name">name: </label>
-                <input type="text" class="form-control" formControlName="name" id="name" [value]="student.name" (focus)="touch()">
+                <input type="text" class="form-control" formControlName="name" id="name" (blur)="studentForm.controls['name'].markAsTouched()" [value]="student.name" (focus)="touch()" >
                 <ng-container *ngIf="studentForm.controls['name'].errors">
-                    <div #error1 name="error1" class="alert alert-danger" *ngIf="touched && studentForm.controls['name'].errors['required']">שדה חובה
-                    </div>
-                    <div #error2 class="alert alert-danger" *ngIf="touched && studentForm.controls['name'].errors['minlength'] && !studentForm.controls['name'].errors['required']">שם קצר מדי
+                    <div #error1 name="error1" class="alert alert-danger" *ngIf="studentForm.get('name')?.touched && studentForm.controls['name'].errors['required']">שדה חובה
+                    </div> 
+                    <div #error2 class="alert alert-danger" *ngIf="touched1 && studentForm.controls['name'].errors['minlength'] && !studentForm.controls['name'].errors['required']">שם קצר מדי
                     </div>
                 </ng-container>
                 <label for="course">course:</label>

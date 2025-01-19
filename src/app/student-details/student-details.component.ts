@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class StudentDetailsComponent {
   
-  touched:boolean = false;
+  touched1:boolean = false;
   courses:Course[] = COURSES
   years = Year;
 
@@ -53,6 +53,10 @@ export class StudentDetailsComponent {
         "name": new FormControl(this.student.name, [Validators.required, Validators.minLength(2)]),
         "course": new FormControl(this.student.course, Validators.required),
         "year": new FormControl(this.student.year, Validators.required),
+        "pail": new FormControl(this.student.pail),
+        "leavingDate": new FormControl(this.student.leavingDate),
+        "average": new FormControl(this.student.average),
+        "tests": new FormControl(this.student.tests)
       })
     }
   }
@@ -78,6 +82,6 @@ export class StudentDetailsComponent {
     this.onUodateSave.emit(this.student)
   }
   touch(){
-    this.touched = true
+    this.touched1 = true
   }
 }

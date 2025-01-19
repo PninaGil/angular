@@ -1,1 +1,2 @@
-<app-student-list></app-student-list>
+<app-student-list (showTests)="showTests($event)"></app-student-list>
+<app-test-list *ngIf="show" [tests]="tests"></app-test-list>
